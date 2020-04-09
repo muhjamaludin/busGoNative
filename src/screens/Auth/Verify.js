@@ -36,6 +36,12 @@ const localStyles = StyleSheet.create({
 });
 
 class Verify extends Component {
+  constructor(props) {
+    super(props);
+    this.resend = () => {
+      this.props.navigation.navigate('ForgotPassword');
+    };
+  }
   render() {
     return (
       <>
@@ -70,7 +76,9 @@ class Verify extends Component {
           </View>
         </View>
         <View style={localStyles.resendEmail}>
-          <Text style={localStyles.textResendEmail}>Resend Email</Text>
+          <Text style={localStyles.textResendEmail} onPress={this.resend}>
+            Resend Email
+          </Text>
         </View>
       </>
     );
