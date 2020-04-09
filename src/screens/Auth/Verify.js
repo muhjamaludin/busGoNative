@@ -6,7 +6,6 @@ import styles from '../../utils/styles';
 
 const localStyles = StyleSheet.create({
   pict: {
-    marginTop: 120,
     marginBottom: 90,
   },
   textConfirm: {
@@ -27,8 +26,12 @@ const localStyles = StyleSheet.create({
     fontWeight: 'bold',
   },
   resendEmail: {
-    height: 15,
+    height: 45,
     alignItems: 'center',
+  },
+  textResendEmail: {
+    color: '#db933e',
+    fontSize: 25,
   },
 });
 
@@ -67,7 +70,7 @@ class Verify extends Component {
           </View>
         </View>
         <View style={localStyles.resendEmail}>
-          <Text>Resend Email</Text>
+          <Text style={localStyles.textResendEmail}>Resend Email</Text>
         </View>
       </>
     );
