@@ -11,14 +11,11 @@ class Login extends Component {
       pass: '',
     };
     this.login = () => {
-      if (this.state.user === 'Admin' && this.state.pass === 'a') {
-        this.props.navigation.reset({
-          index: 0,
-          routes: [{name: 'BottomStack'}],
-        });
-      } else {
-        ToastAndroid.show('Wrong Username or Password', ToastAndroid.SHORT);
-      }
+      // if (this.state.user === 'Admin' && this.state.pass === 'a') {
+      this.props.navigation.navigate('BottomStack');
+      // } else {
+      //   ToastAndroid.show('Wrong Username or Password', ToastAndroid.SHORT);
+      // }
     };
     this.forgot = () => {
       this.props.navigation.navigate('ForgotPassword');
@@ -61,7 +58,8 @@ class Login extends Component {
               <Button
                 title="Sign In Yeah"
                 onPress={this.login}
-                style={styles.buttonLogin}>
+                style={styles.buttonLogin}
+                block>
                 <Text>Sign In</Text>
               </Button>
             </View>
