@@ -23,6 +23,9 @@ class Login extends Component {
     this.forgot = () => {
       this.props.navigation.navigate('ForgotPassword');
     };
+    this.register = () => {
+      this.props.navigation.navigate('Register');
+    };
   }
   render(navigation) {
     return (
@@ -65,9 +68,7 @@ class Login extends Component {
             <View style={styles.notAccount}>
               <Text>
                 Don't have an account?{' '}
-                <Text
-                  onPress={() => navigation.navigate('Register')}
-                  style={styles.signUp}>
+                <Text onPress={this.register} style={styles.signUp}>
                   Sign Up
                 </Text>
               </Text>
