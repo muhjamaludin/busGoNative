@@ -4,6 +4,11 @@ import {createStackNavigator} from '@react-navigation/stack';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
+import {StyleSheet, Text, View} from 'react-native';
+import {createStore, applyMiddleware} from 'redux';
+import {} from '';
+import {} from '';
+
 const Stack = createStackNavigator();
 const BottomTab = createBottomTabNavigator();
 
@@ -16,6 +21,8 @@ import Home from './src/Home';
 import Tickect from './src/screens/Ticket';
 import History from './src/screens/History';
 import Profile from './src/screens/MyProfile';
+
+import SearchBus from './src/screens/SearchBus';
 
 class BottomStack extends Component {
   render() {
@@ -100,6 +107,11 @@ class MainScreen extends Component {
           name="Verify"
           options={{title: 'Succes', headerShown: false}}
           component={Verify}
+        />
+        <Stack.Screen
+          name="SearchBus"
+          options={{title: 'Search Bus', headerShown: true}}
+          component={SearchBus}
         />
       </Stack.Navigator>
     );

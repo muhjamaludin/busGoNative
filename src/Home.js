@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {View, Text, StyleSheet} from 'react-native';
+import {View, FlatList, Text, StyleSheet} from 'react-native';
 import {TextInput} from 'react-native-gesture-handler';
 import {Button} from 'native-base';
 import DatePicker from 'react-native-datepicker';
@@ -21,6 +21,9 @@ class Home extends Component {
     super(props);
     this.state = {
       date: '2020-04-08',
+    };
+    this.searchBus = () => {
+      this.props.navigation.navigate('SearchBus');
     };
   }
   render() {
@@ -84,7 +87,7 @@ class Home extends Component {
           </View>
         </View>
         <View>
-          <Button>
+          <Button onPress={this.searchBus}>
             <Text>Search Bus</Text>
           </Button>
         </View>

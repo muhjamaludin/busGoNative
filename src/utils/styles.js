@@ -38,8 +38,11 @@ const styles = StyleSheet.create({
     height: 115,
   },
   formLoginText: {
-    backgroundColor: 'red',
+    backgroundColor: '#fff',
+    borderWidth: 1,
+    borderColor: '#eef0f0',
     borderRadius: 50,
+    padding: 10,
     width: 300,
     margin: 10,
     height: 50,
@@ -57,6 +60,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     borderRadius: 50,
+    backgroundColor: '#ade8ff',
   },
   notAccount: {
     margin: 30,

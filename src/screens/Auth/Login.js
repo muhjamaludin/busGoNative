@@ -1,7 +1,8 @@
 import React, {Component} from 'react';
-import {View, Text, Image, Alert, ToastAndroid} from 'react-native';
+import {View, Text, Image, StyleSheet, Alert, ToastAndroid} from 'react-native';
 import styles from '../../utils/styles';
 import {Button, Input} from 'native-base';
+// import LinearGradient from 'expo-linear-gradient';
 
 class Login extends Component {
   constructor(props) {
@@ -54,7 +55,8 @@ class Login extends Component {
             <View style={styles.forgotPassword}>
               <Text onPress={this.forgot}>Forgot Password ?</Text>
             </View>
-            <View>
+            <View style={localStyles.viewSign}>
+              {/* <LinearGradient colors={['#ade8ff', '#b0baff', '#b572ff']}> */}
               <Button
                 title="Sign In Yeah"
                 onPress={this.login}
@@ -62,6 +64,7 @@ class Login extends Component {
                 block>
                 <Text>Sign In</Text>
               </Button>
+              {/* </LinearGradient> */}
             </View>
             <View style={styles.notAccount}>
               <Text>
@@ -77,5 +80,14 @@ class Login extends Component {
     );
   }
 }
+
+const localStyles = StyleSheet.create({
+  viewSign: {
+    width: '90%',
+    alignContent: 'center',
+    alignItems: 'center',
+    marginLeft: 20,
+  },
+});
 
 export default Login;
