@@ -1,6 +1,7 @@
 /**
  * @format
  */
+// import('./ReactrotonConfig').then(() => console.log('Reactroton Configured'));
 
 import {AppRegistry} from 'react-native';
 import App from './App';

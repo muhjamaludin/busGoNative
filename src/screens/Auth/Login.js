@@ -1,23 +1,21 @@
 import React, {Component} from 'react';
-import {View, Text, Image, StyleSheet, Alert, ToastAndroid} from 'react-native';
+import {View, Text, Image, StyleSheet, ToastAndroid} from 'react-native';
 import styles from '../../utils/styles';
 import {Button, Input} from 'native-base';
 // import LinearGradient from 'expo-linear-gradient';
+import AsyncStorage from '@react-native-community/async-storage';
+import {setLogin} from '../../redux/actions/AuthActions';
+import {connect} from 'react-redux';
+import auth from '../../utils/auth';
 
 class Login extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      user: '',
-      pass: '',
+    state = {
+      username: '',
+      password: '',
     };
-    this.login = () => {
-      // if (this.state.user === 'Admin' && this.state.pass === 'a') {
-      this.props.navigation.navigate('BottomStack');
-      // } else {
-      //   ToastAndroid.show('Wrong Username or Password', ToastAndroid.SHORT);
-      // }
-    };
+
     this.forgot = () => {
       this.props.navigation.navigate('ForgotPassword');
     };
@@ -25,7 +23,26 @@ class Login extends Component {
       this.props.navigation.navigate('Register');
     };
   }
+  login = () => {
+    console.log('aman', this.state.username);
+    const data = {
+      username: this.state.username,
+      password: this.state.password,
+    };
+    console.log('ssssssssss', data);
+    this.props.setLogin(data);
+  };
+
+  // componentDidMount() {
+  //   AsyncStorage.getItem('token', (err, result) => {
+  //     if (result) {
+  //       console.log('Yeah', result);
+  //     }
+  //   });
+  // }
+
   render(navigation) {
+    console.disableYellowBox = true;
     return (
       <>
         <View>
@@ -41,12 +58,12 @@ class Login extends Component {
             </View>
             <View style={styles.formLogin}>
               <Input
-                onChange={(text) => this.setState({user: text})}
+                onChangeText={(username) => this.setState({username: username})}
                 placeholder="username"
                 style={styles.formLoginText}
               />
               <Input
-                onChange={(text) => this.setState({pass: text})}
+                onChangeText={(password) => this.setState({password: password})}
                 secureTextEntry={true}
                 placeholder="password"
                 style={styles.formLoginText}
@@ -90,4 +107,5 @@ const localStyles = StyleSheet.create({
   },
 });
 
-export default Login;
+const mapDispatchToProps = {setLogin};
+export default connect(null, mapDispatchToProps)(Login);
