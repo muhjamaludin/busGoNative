@@ -1,7 +1,11 @@
 import React, {Component} from 'react';
-import {View, Text, StyleSheet} from 'react-native';
+import {View, Text, StyleSheet, TouchableOpacity} from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import {Button} from 'native-base';
+import {connect} from 'react-redux';
+import {setLogout} from '../redux/actions/AuthActions';
+
+import {Header} from 'react-native-elements';
 
 const localStyle = StyleSheet.create({
   viewButton: {
@@ -19,9 +23,32 @@ const localStyle = StyleSheet.create({
 });
 
 class Profile extends Component {
+  logout = () => {
+    this.props.setLogout();
+    this.props.navigation.navigate('LoginScreen');
+  };
+
   render() {
     return (
       <View>
+        <View>
+          <Header
+            leftComponent={{
+              text: 'BusGo',
+              style: {color: 'blue', fontSize: 25},
+            }}
+            rightComponent={{
+              text: 'Logout',
+              color: 'blue',
+              onPress: this.logout,
+            }}
+            containerStyle={{
+              backgroundColor: '#f7f7f7',
+              height: 60,
+              marginTop: -20,
+            }}
+          />
+        </View>
         <View style={localStyle.viewButton}>
           <Button style={localStyle.profileButton}>
             <Icon name="user" size={67} />
@@ -52,4 +79,4 @@ class Profile extends Component {
   }
 }
 
-export default Profile;
+export default connect(null, {setLogout})(Profile);
