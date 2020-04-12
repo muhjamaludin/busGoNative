@@ -1,6 +1,8 @@
-import React, {Component, useState} from 'react';
+import React, {Component} from 'react';
 import {View, FlatList, Text, StyleSheet, Picker} from 'react-native';
 import {TextInput} from 'react-native-gesture-handler';
+import Carousel from 'react-native-carousel-view';
+import ViewPagerAndroid from 'react-native';
 import {Button} from 'native-base';
 import DatePicker from 'react-native-datepicker';
 import NumericInput from 'react-native-numeric-input';
@@ -39,13 +41,40 @@ const localStyles = StyleSheet.create({
   viewButtonSearch: {
     alignItems: 'center',
   },
+  container: {
+    flex: 0.5,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  contentContainer: {
+    borderWidth: 2,
+    borderColor: '#CCC',
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
 });
+
+// renderItem = ({item, index}) => {
+//   const {backgroundColor} = item;
+//   return (
+//     <TouchableOpacity
+//       style={[localStyles.item, {backgroundColor}]}
+//       onPress={() => {
+//         this._carousel.scrollToIndex(index);
+//       }}>
+//       .......
+//     </TouchableOpacity>
+//   );
+// };
 
 class Home extends Component {
   constructor(props) {
     super(props);
     this.state = {
       date: '2020-04-08',
+      route: 'Semarang - Surabaya',
+      data: [1, 2, 3, 4],
     };
     this.searchBus = () => {
       this.props.navigation.navigate('SearchBus');
@@ -53,8 +82,6 @@ class Home extends Component {
   }
   render() {
     console.disableYellowBox = true;
-    const [selectedValue, setSelectedValue] = useState('java');
-
     return (
       <View>
         <View>
@@ -77,13 +104,19 @@ class Home extends Component {
           <View style={localStyles.viewSearch}>
             <Text>Select Route</Text>
             <Picker
-              selectedValue={selectedValue}
-              style={{height: 50, width: 150}}
+              selectedValue={this.state.route}
+              style={{height: 50, width: 250}}
               onValueChange={(itemValue, itemIndex) =>
-                setSelectedValue(itemValue)
+                this.setState({route: itemValue})
               }>
-              <Picker.Item label="Java" value="java" />
-              <Picker.Item label="JavaScript" value="js" />
+              <Picker.Item
+                label="Surabaya - Semarang"
+                value="Surabaya-Semarang"
+              />
+              <Picker.Item
+                label="Semarang - Surabaya"
+                value="Semarang-Surabaya"
+              />
             </Picker>
           </View>
           <View style={localStyles.dateTraveler}>
@@ -158,6 +191,33 @@ class Home extends Component {
                 Search Bus
               </Text>
             </Button>
+          </View>
+        </View>
+        <View
+          style={{
+            flex: 1,
+            justifyContent: 'center',
+            alignItems: 'center',
+          }}>
+          <View style={localStyles.container}>
+            <Carousel
+              width={375}
+              height={300}
+              delay={2000}
+              indicatorAtBottom={false}
+              indicatorSize={20}
+              indicatorText="✽"
+              indicatorColor="red">
+              <View style={localStyles.contentContainer}>
+                <Text>Page 1</Text>
+              </View>
+              <View style={localStyles.contentContainer}>
+                <Text>Page 2</Text>
+              </View>
+              <View style={localStyles.contentContainer}>
+                <Text>Page 3</Text>
+              </View>
+            </Carousel>
           </View>
         </View>
       </View>

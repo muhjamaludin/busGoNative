@@ -19,7 +19,7 @@ class History extends Component {
             }}
           />
         </View>
-        <Text>This is History Screen</Text>
+        <Text>Recent Trips</Text>
       </View>
     );
   }
