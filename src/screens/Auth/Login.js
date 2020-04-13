@@ -18,6 +18,7 @@ class Login extends Component {
 
     this.forgot = () => {
       this.props.navigation.navigate('ForgotPassword');
+      console.log('tes');
     };
     this.register = () => {
       this.props.navigation.navigate('Register');

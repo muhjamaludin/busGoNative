@@ -1,12 +1,14 @@
 import React, {Component} from 'react';
-import {View, FlatList, Text, StyleSheet, Picker} from 'react-native';
-import {TextInput} from 'react-native-gesture-handler';
-import Carousel from 'react-native-carousel-view';
-import ViewPagerAndroid from 'react-native';
+import {View, Text, StyleSheet, Picker} from 'react-native';
 import {Button} from 'native-base';
 import DatePicker from 'react-native-datepicker';
 import NumericInput from 'react-native-numeric-input';
 import {Header} from 'react-native-elements';
+
+import {getRoutes} from './redux/actions/RouteActions';
+import {connect} from 'react-redux';
+import axios from 'axios';
+import {API} from './utils/config';
 
 const localStyles = StyleSheet.create({
   bodyTop: {
@@ -72,16 +74,46 @@ class Home extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      date: '2020-04-08',
-      route: 'Semarang - Surabaya',
+      datet: '04-04-2020',
+      route: [],
       data: [1, 2, 3, 4],
+      selectedRoute: {},
+      selectedDestination: {},
+      selectedDate: {},
+      date: {},
+      routes: [],
+      numeric: '',
     };
-    this.searchBus = () => {
-      this.props.navigation.navigate('SearchBus');
-    };
+    console.log(this.state.datet);
   }
+
+  searchBus = async () => {
+    this.props.navigation.navigate('SearchBus');
+  };
+
+  componentWillReceiveProps() {
+    if (this.props.route.params) {
+      this.setState({
+        date: this.props.route.params.dateSelected,
+      });
+    }
+  }
+  async componentDidMount() {
+    const result = await axios.get(API.API_BACKEND.concat('route'));
+    this.setState({route: result.data});
+  }
+  Bo = (selected) => {
+    this.setState({
+      selectedItem: selected,
+    });
+  };
+  onSubmit = () => {
+    this.props.navigation.navigate('Schedules');
+  };
+
   render() {
     console.disableYellowBox = true;
+    console.log(this.state.route);
     return (
       <View>
         <View>
@@ -129,7 +161,7 @@ class Home extends Component {
                   borderTopLeftRadius: 10,
                   borderBottomLeftRadius: 10,
                 }}
-                date={this.state.date}
+                date={this.state.datet}
                 mode="date"
                 placeholder="select date"
                 format="DD-MM-YYYY"
@@ -149,7 +181,7 @@ class Home extends Component {
                   },
                 }}
                 onDateChange={(date) => {
-                  this.setState({date: date});
+                  this.setState({datet: date});
                 }}
               />
             </View>
@@ -193,36 +225,16 @@ class Home extends Component {
             </Button>
           </View>
         </View>
-        <View
-          style={{
-            flex: 1,
-            justifyContent: 'center',
-            alignItems: 'center',
-          }}>
-          <View style={localStyles.container}>
-            <Carousel
-              width={375}
-              height={300}
-              delay={2000}
-              indicatorAtBottom={false}
-              indicatorSize={20}
-              indicatorText="✽"
-              indicatorColor="red">
-              <View style={localStyles.contentContainer}>
-                <Text>Page 1</Text>
-              </View>
-              <View style={localStyles.contentContainer}>
-                <Text>Page 2</Text>
-              </View>
-              <View style={localStyles.contentContainer}>
-                <Text>Page 3</Text>
-              </View>
-            </Carousel>
-          </View>
-        </View>
       </View>
     );
   }
 }
 
-export default Home;
+const mapStateToProps = (state) => ({
+  schedules: state.schedules,
+  routes: state.routes,
+});
+
+const mapDispatchToProps = {getRoutes};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Home);

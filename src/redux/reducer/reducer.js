@@ -1,9 +1,11 @@
 import {combineReducers} from 'redux';
 
 import AuthReducer from './AuthReducer';
-import ScheduleReducer from './ScheduleReducer';
+import Schedules from './ScheduleReducer';
+import Routes from './RoutesReducer';
 
 export default combineReducers({
-  scheduleReducer: ScheduleReducer,
+  schedules: Schedules,
   authData: AuthReducer,
+  routes: Routes,
 });

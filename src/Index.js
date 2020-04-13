@@ -19,6 +19,8 @@ import Tickect from './screens/Ticket';
 import History from './screens/History';
 import Profile from './screens/MyProfile';
 
+import SearchBus from './screens/SearchBus';
+
 class BottomStack extends Component {
   render() {
     return (
@@ -74,20 +76,14 @@ class MainScreen extends Component {
       <NavigationContainer>
         <Stack.Navigator>
           {this.props.auth && !this.props.auth.isLogin ? (
-            <Stack.Screen
-              name="LoginScreen"
-              options={{
-                title: 'Login',
-                headerShown: true,
-              }}
-              component={LoginScreen}
-            />
-          ) : (
             <>
               <Stack.Screen
-                name="BottomStack"
-                options={{title: 'BusGo', headerShown: false}}
-                component={BottomStack}
+                name="LoginScreen"
+                options={{
+                  title: 'Login',
+                  headerShown: true,
+                }}
+                component={LoginScreen}
               />
               <Stack.Screen
                 name="ForgotPassword"
@@ -97,7 +93,6 @@ class MainScreen extends Component {
                 }}
                 component={ForgotPassword}
               />
-
               <Stack.Screen
                 name="Register"
                 options={{title: 'Register'}}
@@ -107,6 +102,19 @@ class MainScreen extends Component {
                 name="Verify"
                 options={{title: 'Succes', headerShown: false}}
                 component={Verify}
+              />
+            </>
+          ) : (
+            <>
+              <Stack.Screen
+                name="BottomStack"
+                options={{title: 'BusGo', headerShown: false}}
+                component={BottomStack}
+              />
+              <Stack.Screen
+                name="SearchBus"
+                options={{title: 'Get Your Bus', headerShown: true}}
+                component={SearchBus}
               />
             </>
           )}
@@ -119,6 +127,7 @@ class MainScreen extends Component {
 const mapStateToProps = (state) => {
   return {
     auth: state.authData,
+    register: state.authData,
   };
 };
 
