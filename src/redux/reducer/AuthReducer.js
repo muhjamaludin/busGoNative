@@ -19,6 +19,7 @@ export default function (state = initialState, {type, payload}) {
       return {
         ...state,
         isLogin: true,
+        token: payload.token,
         data: payload,
       };
     }
@@ -32,6 +33,8 @@ export default function (state = initialState, {type, payload}) {
       return {
         ...state,
         isLogin: false,
+        token: null,
+        data: [],
       };
     }
     default:

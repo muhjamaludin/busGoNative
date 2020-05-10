@@ -3,7 +3,6 @@ import {ToastAndroid} from 'react-native';
 import {API} from '../../utils/config';
 import axios from 'axios';
 import AsyncStorage from '@react-native-community/async-storage';
-import {Toast} from 'native-base';
 
 export const setLogin = (data) => async (dispatch) => {
   try {
@@ -13,7 +12,7 @@ export const setLogin = (data) => async (dispatch) => {
       await AsyncStorage.setItem('token', res.data.token);
       dispatch({
         type: SET_LOGIN,
-        payload: res.data.token,
+        payload: res.data,
       });
       return true;
     } else {

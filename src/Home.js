@@ -1,8 +1,7 @@
 import React, {Component} from 'react';
 import {View, FlatList, Text, StyleSheet, Picker} from 'react-native';
-import {TextInput} from 'react-native-gesture-handler';
-import Carousel from 'react-native-carousel-view';
-import ViewPagerAndroid from 'react-native';
+import {getUserbyId} from './redux/actions/UserActions';
+import {connect} from 'react-redux';
 import {Button} from 'native-base';
 import DatePicker from 'react-native-datepicker';
 import NumericInput from 'react-native-numeric-input';
@@ -80,6 +79,14 @@ class Home extends Component {
       this.props.navigation.navigate('SearchBus');
     };
   }
+
+  componentDidMount() {
+    const id = this.props.userId;
+    const token = this.props.token;
+    console.log('toktok', token);
+    this.props.getUserbyId(id, token);
+  }
+
   render() {
     console.disableYellowBox = true;
     return (
@@ -199,30 +206,17 @@ class Home extends Component {
             justifyContent: 'center',
             alignItems: 'center',
           }}>
-          <View style={localStyles.container}>
-            <Carousel
-              width={375}
-              height={300}
-              delay={2000}
-              indicatorAtBottom={false}
-              indicatorSize={20}
-              indicatorText="✽"
-              indicatorColor="red">
-              <View style={localStyles.contentContainer}>
-                <Text>Page 1</Text>
-              </View>
-              <View style={localStyles.contentContainer}>
-                <Text>Page 2</Text>
-              </View>
-              <View style={localStyles.contentContainer}>
-                <Text>Page 3</Text>
-              </View>
-            </Carousel>
-          </View>
+          <View style={localStyles.container} />
         </View>
       </View>
     );
   }
 }
 
-export default Home;
+const mapStateToProps = (state) => {
+  return {
+    token: state.authData.token,
+  };
+};
+
+export default connect(mapStateToProps, {getUserbyId})(Home);

@@ -33,7 +33,7 @@ class BottomStack extends Component {
             ),
           }}
         />
-        <BottomTab.Screen
+        {/* <BottomTab.Screen
           component={Tickect}
           name="Ticket"
           options={{
@@ -42,7 +42,7 @@ class BottomStack extends Component {
               <Icon name="ticket-confirmation" color={color} size={size} />
             ),
           }}
-        />
+        /> */}
         <BottomTab.Screen
           component={History}
           name="History"
@@ -74,20 +74,14 @@ class MainScreen extends Component {
       <NavigationContainer>
         <Stack.Navigator>
           {this.props.auth && !this.props.auth.isLogin ? (
-            <Stack.Screen
-              name="LoginScreen"
-              options={{
-                title: 'Login',
-                headerShown: true,
-              }}
-              component={LoginScreen}
-            />
-          ) : (
             <>
               <Stack.Screen
-                name="BottomStack"
-                options={{title: 'BusGo', headerShown: false}}
-                component={BottomStack}
+                name="LoginScreen"
+                options={{
+                  title: 'Login',
+                  headerShown: true,
+                }}
+                component={LoginScreen}
               />
               <Stack.Screen
                 name="ForgotPassword"
@@ -107,6 +101,14 @@ class MainScreen extends Component {
                 name="Verify"
                 options={{title: 'Succes', headerShown: false}}
                 component={Verify}
+              />
+            </>
+          ) : (
+            <>
+              <Stack.Screen
+                name="BottomStack"
+                options={{title: 'BusGo', headerShown: false}}
+                component={BottomStack}
               />
             </>
           )}
