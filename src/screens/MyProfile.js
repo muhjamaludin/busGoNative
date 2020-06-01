@@ -189,8 +189,8 @@ class Profile extends Component {
             </View>
           </View>
         ) : (
-          <View>
-            <Text>Makan malam</Text>
+          <View style={{flex: 1, justifyContent: "center", alignItems: 'center'}}>
+            <Text>Loading ...</Text>
           </View>
         )}
       </View>
