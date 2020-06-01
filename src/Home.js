@@ -1,16 +1,18 @@
 import React, {Component} from 'react';
-import {View, FlatList, Text, StyleSheet, Picker} from 'react-native';
+import {View, Text, StyleSheet, Picker, Image} from 'react-native';
 import {getUserbyId} from './redux/actions/UserActions';
+import {getRoutebyId} from './redux/actions/RouteActions';
 import {connect} from 'react-redux';
 import {Button} from 'native-base';
 import DatePicker from 'react-native-datepicker';
 import NumericInput from 'react-native-numeric-input';
 import {Header} from 'react-native-elements';
+import {ScrollView} from 'react-native-gesture-handler';
 
 const localStyles = StyleSheet.create({
   bodyTop: {
     backgroundColor: 'lightskyblue',
-    height: 420,
+    height: 380,
     borderTopRightRadius: 50,
     borderBottomRightRadius: 10,
     borderBottomLeftRadius: 54,
@@ -19,11 +21,12 @@ const localStyles = StyleSheet.create({
   },
   dateTraveler: {
     flexDirection: 'row',
-    justifyContent: 'space-around',
-    padding: 20,
+    justifyContent: 'flex-start',
+    padding: 10,
   },
   titleBook: {
-    fontSize: 36,
+    fontSize: 26,
+    textAlign: 'center',
     fontFamily: 'monospace',
     marginTop: 10,
     marginBottom: 10,
@@ -39,6 +42,7 @@ const localStyles = StyleSheet.create({
   },
   viewButtonSearch: {
     alignItems: 'center',
+    top: 30,
   },
   container: {
     flex: 0.5,
@@ -51,6 +55,9 @@ const localStyles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
+  },
+  scroll: {
+    padding: 10,
   },
 });
 
@@ -85,10 +92,12 @@ class Home extends Component {
     const token = this.props.token;
     console.log('toktok', token);
     this.props.getUserbyId(id, token);
+    this.props.getRoutebyId(100, token);
   }
 
   render() {
     console.disableYellowBox = true;
+    console.log('route', this.props.route);
     return (
       <View>
         <View>
@@ -116,14 +125,14 @@ class Home extends Component {
               onValueChange={(itemValue, itemIndex) =>
                 this.setState({route: itemValue})
               }>
-              <Picker.Item
-                label="Surabaya - Semarang"
-                value="Surabaya-Semarang"
-              />
-              <Picker.Item
-                label="Semarang - Surabaya"
-                value="Semarang-Surabaya"
-              />
+              {this.props.route.data &&
+                this.props.route.data.map((data, i) => (
+                  <Picker.Item
+                    label={data.departure + ' - ' + data.destination}
+                    value={data.id}
+                  />
+                ))}
+              {/* {console.log('mam', this.props.route.data[0].departure)} */}
             </Picker>
           </View>
           <View style={localStyles.dateTraveler}>
@@ -160,7 +169,7 @@ class Home extends Component {
                 }}
               />
             </View>
-            <View>
+            {/* <View>
               <Text>Traveller</Text>
               <NumericInput
                 value={this.state.value}
@@ -178,7 +187,7 @@ class Home extends Component {
                 backgroundColor="blue"
                 iconStyle={{color: 'black'}}
               />
-            </View>
+            </View> */}
           </View>
           <View style={localStyles.viewButtonSearch}>
             <Button
@@ -208,6 +217,35 @@ class Home extends Component {
           }}>
           <View style={localStyles.container} />
         </View>
+        <ScrollView horizontal={true} style={{padding: 10}}>
+          <View style={localStyles.scroll}>
+            <Image
+              style={{width: 200, height: 250}}
+              source={{
+                uri:
+                  'https://tenteraverbisa.files.wordpress.com/2019/11/transportasi-umum-dan-wisata.jpg',
+              }}
+            />
+          </View>
+          <View style={localStyles.scroll}>
+            <Image
+              style={{width: 200, height: 250}}
+              source={{
+                uri:
+                  'https://tenteraverbisa.files.wordpress.com/2019/11/transportasi-umum-dan-wisata.jpg',
+              }}
+            />
+          </View>
+          <View style={localStyles.scroll}>
+            <Image
+              style={{width: 200, height: 250}}
+              source={{
+                uri:
+                  'https://tenteraverbisa.files.wordpress.com/2019/11/transportasi-umum-dan-wisata.jpg',
+              }}
+            />
+          </View>
+        </ScrollView>
       </View>
     );
   }
@@ -216,7 +254,8 @@ class Home extends Component {
 const mapStateToProps = (state) => {
   return {
     token: state.authData.token,
+    route: state.route.routes,
   };
 };
 
-export default connect(mapStateToProps, {getUserbyId})(Home);
+export default connect(mapStateToProps, {getUserbyId, getRoutebyId})(Home);

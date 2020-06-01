@@ -53,123 +53,146 @@ class Profile extends Component {
     console.log('id', this.props.user);
     return (
       <View>
-        <View>
-          <Header
-            leftComponent={{
-              text: 'BusGo',
-              style: {color: 'blue', fontSize: 25},
-            }}
-            rightComponent={{
-              text: 'Logout',
-              color: 'blue',
-              onPress: this.logout,
-            }}
-            containerStyle={{
-              backgroundColor: '#f7f7f7',
-              height: 60,
-              marginTop: -20,
-            }}
-          />
-        </View>
-        <View style={localStyle.viewButton}>
-          {/* <Button style={localStyle.profileButton}> */}
-          <Image
-            style={localStyle.profileButton}
-            source={{
-              uri:
-                API.API_BACKEND +
-                'profile/' +
-                this.props.user.data[0].profile_picture,
-            }}
-          />
-          {/* </Button> */}
-        </View>
-        <View style={{top: 10}}>
-          <View style={{flexDirection: 'row'}}>
-            <View style={localStyle.paddingIcon}>
-              <Icon name="money" style={localStyle.iconStyle} />
-            </View>
+        {this.props.user.data ? (
+          <View>
             <View>
-              <Text style={localStyle.textStyle}>
-                {' '}
-                Rp {this.props.user.data[0].balance}, 00{' '}
-              </Text>
+              <Header
+                leftComponent={{
+                  text: 'BusGo',
+                  style: {color: 'blue', fontSize: 25},
+                }}
+                rightComponent={{
+                  text: 'Logout',
+                  color: 'blue',
+                  onPress: this.logout,
+                }}
+                containerStyle={{
+                  backgroundColor: '#f7f7f7',
+                  height: 60,
+                  marginTop: -20,
+                }}
+              />
+            </View>
+            <View style={localStyle.viewButton}>
+              {/* <Button style={localStyle.profileButton}> */}
+              <Image
+                style={localStyle.profileButton}
+                source={{
+                  uri:
+                    API.API_BACKEND + 'profile/' + this.props.user.data
+                      ? this.props.user.data[0].profile_picture
+                      : 'alt',
+                }}
+              />
+              {/* </Button> */}
+            </View>
+            <View style={{top: 10}}>
+              <View style={{flexDirection: 'row'}}>
+                <View style={localStyle.paddingIcon}>
+                  <Icon name="money" style={localStyle.iconStyle} />
+                </View>
+                <View>
+                  <Text style={localStyle.textStyle}>
+                    {' '}
+                    Rp{' '}
+                    {this.props.user.data
+                      ? this.props.user.data[0].balance
+                      : '0'}
+                    , 00{' '}
+                  </Text>
+                </View>
+              </View>
+              <View style={{flexDirection: 'row'}}>
+                <View style={localStyle.paddingIcon}>
+                  <Icon name="user" style={localStyle.iconStyle} />
+                </View>
+                <View>
+                  <Text style={localStyle.textStyle}>
+                    {' '}
+                    {this.props.user.data
+                      ? this.props.user.data[0].fullname
+                      : 'name'}{' '}
+                  </Text>
+                </View>
+              </View>
+              <View style={{flexDirection: 'row'}}>
+                <View style={localStyle.paddingIcon}>
+                  <Icon name="id-card" style={localStyle.iconStyle} />
+                </View>
+                <View>
+                  <Text style={localStyle.textStyle}>
+                    {' '}
+                    {this.props.user.data
+                      ? this.props.user.data[0].identity
+                      : 'identity'}{' '}
+                  </Text>
+                </View>
+              </View>
+              <View style={{flexDirection: 'row'}}>
+                <View style={localStyle.paddingIcon}>
+                  <Icon name="phone" style={localStyle.iconStyle} />
+                </View>
+                <View>
+                  <Text style={localStyle.textStyle}>
+                    {' '}
+                    0
+                    {this.props.user.data
+                      ? this.props.user.data[0].phone
+                      : '0'}{' '}
+                  </Text>
+                </View>
+              </View>
+              <View style={{flexDirection: 'row'}}>
+                <View style={localStyle.paddingIcon}>
+                  <Icon name="envelope" style={localStyle.iconStyle} />
+                </View>
+                <View>
+                  <Text style={localStyle.textStyle}>
+                    {' '}
+                    {this.props.user.data
+                      ? this.props.user.data[0].email
+                      : 'email'}{' '}
+                  </Text>
+                </View>
+              </View>
+              <View style={{flexDirection: 'row'}}>
+                <View style={localStyle.paddingIcon}>
+                  <Icon name="map-marker" style={localStyle.iconStyle} />
+                </View>
+                <View>
+                  <Text style={localStyle.textStyle}>
+                    {' '}
+                    {this.props.user.data
+                      ? this.props.user.data[0].address
+                      : 'address'}{' '}
+                  </Text>
+                </View>
+              </View>
+            </View>
+            <View style={{alignItems: 'center', top: 150}}>
+              <Button
+                style={{
+                  width: '80%',
+                  backgroundColor: '#f6c143',
+                  borderRadius: 50,
+                }}>
+                <Text
+                  style={{
+                    textAlign: 'center',
+                    width: '100%',
+                    fontWeight: 'bold',
+                    fontSize: 20,
+                  }}>
+                  Edit Profile
+                </Text>
+              </Button>
             </View>
           </View>
-          <View style={{flexDirection: 'row'}}>
-            <View style={localStyle.paddingIcon}>
-              <Icon name="user" style={localStyle.iconStyle} />
-            </View>
-            <View>
-              <Text style={localStyle.textStyle}>
-                {' '}
-                {this.props.user.data[0].fullname}{' '}
-              </Text>
-            </View>
+        ) : (
+          <View>
+            <Text>Makan malam</Text>
           </View>
-          <View style={{flexDirection: 'row'}}>
-            <View style={localStyle.paddingIcon}>
-              <Icon name="id-card" style={localStyle.iconStyle} />
-            </View>
-            <View>
-              <Text style={localStyle.textStyle}>
-                {' '}
-                {this.props.user.data[0].identity}{' '}
-              </Text>
-            </View>
-          </View>
-          <View style={{flexDirection: 'row'}}>
-            <View style={localStyle.paddingIcon}>
-              <Icon name="phone" style={localStyle.iconStyle} />
-            </View>
-            <View>
-              <Text style={localStyle.textStyle}>
-                {' '}
-                0{this.props.user.data[0].phone}{' '}
-              </Text>
-            </View>
-          </View>
-          <View style={{flexDirection: 'row'}}>
-            <View style={localStyle.paddingIcon}>
-              <Icon name="envelope" style={localStyle.iconStyle} />
-            </View>
-            <View>
-              <Text style={localStyle.textStyle}>
-                {' '}
-                {this.props.user.data[0].email}{' '}
-              </Text>
-            </View>
-          </View>
-          <View style={{flexDirection: 'row'}}>
-            <View style={localStyle.paddingIcon}>
-              <Icon name="map-marker" style={localStyle.iconStyle} />
-            </View>
-            <View>
-              <Text style={localStyle.textStyle}>
-                {' '}
-                {this.props.user.data[0].address}{' '}
-              </Text>
-            </View>
-          </View>
-        </View>
-        <View style={{alignItems: 'center', top: 150}}>
-          <Button
-            style={{
-              width: '80%',
-              backgroundColor: '#f6c143',
-              borderRadius: 50,
-            }}>
-            <Text
-              style={{
-                textAlign: 'center',
-                width: '100%',
-                fontWeight: 'bold',
-                fontSize: 20,
-              }}>
-              Edit Profile
-            </Text>
-          </Button>
-        </View>
+        )}
       </View>
     );
   }

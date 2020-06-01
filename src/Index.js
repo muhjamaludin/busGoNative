@@ -13,6 +13,7 @@ import LoginScreen from './screens/Auth/Login';
 import ForgotPassword from './screens/Auth/ForgotPassword';
 import RegisterScreen from './screens/Auth/Register';
 import Verify from './screens/Auth/Verify';
+import SearchBus from './screens/SearchBus';
 
 import Home from './Home';
 import Tickect from './screens/Ticket';
@@ -109,6 +110,11 @@ class MainScreen extends Component {
                 name="BottomStack"
                 options={{title: 'BusGo', headerShown: false}}
                 component={BottomStack}
+              />
+              <Stack.Screen
+                name="SearchBus"
+                options={{title: 'Search Bus', headerShown: true}}
+                component={SearchBus}
               />
             </>
           )}
