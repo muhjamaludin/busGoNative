@@ -61,19 +61,6 @@ const localStyles = StyleSheet.create({
   },
 });
 
-// renderItem = ({item, index}) => {
-//   const {backgroundColor} = item;
-//   return (
-//     <TouchableOpacity
-//       style={[localStyles.item, {backgroundColor}]}
-//       onPress={() => {
-//         this._carousel.scrollToIndex(index);
-//       }}>
-//       .......
-//     </TouchableOpacity>
-//   );
-// };
-
 class Home extends Component {
   constructor(props) {
     super(props);
