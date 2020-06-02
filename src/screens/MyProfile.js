@@ -43,6 +43,23 @@ class Profile extends Component {
     this.props.setLogout();
   };
 
+  submit = () => {
+    const data = {
+      name: this.props.user.data[0].fullname,
+      identity: this.props.user.data[0].identity,
+      phone: this.props.user.data[0].phone,
+      email: this.props.user.data[0].email,
+      address: this.props.user.data[0].address
+    }
+    this.props.navigation.navigate('EditProfile', {
+      name: data.name,
+      identity: data.identity,
+      phone: data.phone,
+      email: data.email,
+      address: data.address
+    })
+  }
+
   componentDidMount() {
     const id = this.props.userId;
     const token = this.props.token;
@@ -171,6 +188,7 @@ class Profile extends Component {
             </View>
             <View style={{alignItems: 'center', top: 150}}>
               <Button
+                onPress={this.submit}
                 style={{
                   width: '80%',
                   backgroundColor: '#f6c143',

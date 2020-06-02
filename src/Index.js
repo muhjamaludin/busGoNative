@@ -14,6 +14,7 @@ import ForgotPassword from './screens/Auth/ForgotPassword';
 import RegisterScreen from './screens/Auth/Register';
 import Verify from './screens/Auth/Verify';
 import SearchBus from './screens/SearchBus';
+import EditProfile from './screens/EditProfile'
 
 import Home from './Home';
 import Tickect from './screens/Ticket';
@@ -92,7 +93,6 @@ class MainScreen extends Component {
                 }}
                 component={ForgotPassword}
               />
-
               <Stack.Screen
                 name="Register"
                 options={{title: 'Register'}}
@@ -115,6 +115,11 @@ class MainScreen extends Component {
                 name="SearchBus"
                 options={{title: 'Search Bus', headerShown: true}}
                 component={SearchBus}
+              />
+              <Stack.Screen
+                name="EditProfile"
+                options={{title: 'Edit Profile'}}
+                component={EditProfile}
               />
             </>
           )}
